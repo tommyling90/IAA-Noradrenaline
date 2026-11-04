@@ -1,3 +1,4 @@
+# ML classique pour le décodage de signaux neuronaux (pas de deep learning)
 numpy>=2.0,<3
 pandas>=2.2,<3
 scipy>=1.13,<2
