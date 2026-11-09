@@ -13,3 +13,10 @@ def sample_neurons(fluo, n_samples, rng):
     return fluo[indices], indices
 
 def temporal_features(fluo, lever, radius=3):
+    n, T = fluo.shape
+    centers = np.arange(radius, T - radius)
+    windows = np.stack([fluo[:, centers + k].T for k in range(-radius, radius+1)], axis=1)
+    X = windows.reshape(len(centers), -1)
+    y = lever[centers]
+    valid = np.isfinite(y) & np.isfinite(X).all(axis=1)
+    return X[valid], y[valid], centers[valid]
