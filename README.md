@@ -55,3 +55,32 @@ Example path: `data/raw/ctrl/1387/Spot 1/D1_lever.npy`.
 Raw experimental data should stay on your computer/shared drive and **must not be committed to GitHub**.
 
 Run the `exploration.ipynb` code to make sure the data can be read.
+
+## Workflow for Objective 1:
+```bash
+Notebook: extract_data
+    ↓
+Save raw fluo + lever_2p to .npz #these 2 steps are already executed by notebook and data saved
+    ↓
+data_loader.py
+    ├── Load sessions
+    └── Find minimum number of neurons
+    ↓
+preprocessing.py
+    ├── Average 5 lever positions (nanmean)
+    ├── Sample 80% × min_neurons
+    └── Construct temporal features (t ± 3)
+    ↓
+evaluation.py
+    ├── 5-fold outer CV
+    ├── 3-fold inner CV
+    └── Train / predict / evaluate #all steps until here should be shared by all ML methods
+           ↓
+    normalization/methods.py (normalize AFTER the fold! To prevent training data leakage)
+    ├── standard
+    └── none
+           ↓
+    models/
+    ├── svr.py
+    └── ridge.py
+```
