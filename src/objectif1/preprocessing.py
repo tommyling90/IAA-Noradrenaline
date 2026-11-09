@@ -15,8 +15,15 @@ def sample_neurons(fluo, n_samples, rng):
 def temporal_features(fluo, lever, radius=3):
     n, T = fluo.shape
     centers = np.arange(radius, T - radius)
+    # (samples, offsets, neurons)
     windows = np.stack([fluo[:, centers + k].T for k in range(-radius, radius+1)], axis=1)
+
+    # (samples, features across 3 windows)
     X = windows.reshape(len(centers), -1)
+
+    # (samples,)
     y = lever[centers]
+
+    # prenons que les valeurs non-NaN
     valid = np.isfinite(y) & np.isfinite(X).all(axis=1)
     return X[valid], y[valid], centers[valid]
