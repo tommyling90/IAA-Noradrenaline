@@ -2,6 +2,8 @@
 
 Machine-learning project using experimental data related to noradrenaline.
 
+Python 3.11 required.
+
 ## Project structure
 
 ```text
@@ -84,3 +86,7 @@ evaluation.py
     ├── svr.py
     └── ridge.py
 ```
+### Pour tester sur Objectif 1, exécuter
+
+`python -m src.objectif1.run_experiments --models your_model_name --normalisation your_norm_method`.
+Noter que l'argument `--models` permet une liste de modèles (e.g. `ridge svr`).
