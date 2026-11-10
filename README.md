@@ -60,13 +60,13 @@ Run the `exploration.ipynb` code to make sure the data can be read.
 ```bash
 Notebook: extract_data
     ↓
-Save raw fluo + lever_2p to .npz #these 2 steps are already executed by notebook and data saved
+Save raw fluo + lever_2p to .npz #these 2 steps are already executed by notebook and data saved into data/preprocessed/objectif1
     ↓
-data_loader.py
+data_loader.py #only functions here
     ├── Load sessions
     └── Find minimum number of neurons
     ↓
-preprocessing.py
+preprocessing.py #only functions here
     ├── Average 5 lever positions (nanmean)
     ├── Sample 80% × min_neurons
     └── Construct temporal features (t ± 3)
@@ -76,7 +76,7 @@ evaluation.py
     ├── 3-fold inner CV
     └── Train / predict / evaluate #all steps until here should be shared by all ML methods
            ↓
-    normalization/methods.py (normalize AFTER the fold! To prevent training data leakage)
+    normalization/methods.py # normalize AFTER the fold! To prevent training data leakage
     ├── standard
     └── none
            ↓

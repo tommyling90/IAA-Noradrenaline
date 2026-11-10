@@ -6,7 +6,7 @@ import numpy as np
 def list_all_paths(preprocessed_dir):
     return sorted(Path(preprocessed_dir).glob("*.npz"))
 
-def load_sessions(path):
+def load_session(path):
     with np.load(path, allow_pickle=False) as obj:
         fluo = obj["fluo"].copy()
         lever_2p = obj["lever_2p"].copy()
@@ -19,4 +19,4 @@ def load_sessions(path):
 def minimum_neurons(paths):
     if not paths:
         raise ValueError("No extracted sessions found; run extraction notebook first")
-    return min(load_sessions(p)[0].shape[0] for p in paths)
+    return min(load_session(p)[0].shape[0] for p in paths)
